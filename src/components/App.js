@@ -9,7 +9,8 @@ class App extends Component {
         super();
 
         this.state = {
-            myAppointments: []
+            myAppointments: [],
+            lastIndex: 0
         }
     }
 
@@ -17,7 +18,11 @@ class App extends Component {
         fetch('./data.json')
         .then(response => response.json())
         .then(result => {
-            const apts = result.map(apt => apt);
+            const apts = result.map(apt => {
+                this.setState({ lastIndex: this.state.lastIndex + 1 });
+                apt.id = this.state.lastIndex;
+                return apt;
+            });
             this.setState({myAppointments: apts});
         });
     }
