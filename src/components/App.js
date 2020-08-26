@@ -9,8 +9,17 @@ class App extends Component {
         super();
 
         this.state = {
-            myName: 'Plam'
+            myAppointments: []
         }
+    }
+
+    componentDidMount() {
+        fetch('./data.json')
+        .then(response => response.json())
+        .then(result => {
+            const apts = result.map(apt => apt);
+            this.setState({myAppointments: apts});
+        });
     }
 
     render() {
@@ -20,7 +29,6 @@ class App extends Component {
                     <div className="row">
                         <div className="col-md-12 bg-white">
                             <div className="container">
-                                {this.state.myName}
                                 <AddAppointments />
                                 <SearchAppointments />
                                 <ListAppointments />
