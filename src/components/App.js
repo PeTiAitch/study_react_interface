@@ -21,8 +21,8 @@ class App extends Component {
         .then(response => response.json())
         .then(result => {
             const apts = result.map(apt => {
-                this.setState({ lastIndex: this.state.lastIndex + 1 });
                 apt.id = this.state.lastIndex;
+                this.setState({ lastIndex: this.state.lastIndex + 1 });
                 return apt;
             });
             this.setState({myAppointments: apts});
@@ -41,6 +41,16 @@ class App extends Component {
         this.setState({formDisplay: !this.state.formDisplay});
     }
 
+    addAppointment = (apt) => {
+        let tempApts = this.state.myAppointments;
+        apt.id = this.state.lastIndex;
+        tempApts.unshift(apt);
+        this.setState({
+            myAppointments: tempApts,
+            lastIndex: this.state.lastIndex + 1
+        });
+    }
+
     render() {
         return (
             <main className="page bg-white" id="petratings">
@@ -51,6 +61,7 @@ class App extends Component {
                                 <AddAppointments 
                                     formDisplay={this.state.formDisplay} 
                                     toggleForm={this.toggleForm}
+                                    addAppointment={this.addAppointment}
                                     />
                                 <SearchAppointments />
                                 <ListAppointments 
