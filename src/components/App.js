@@ -11,7 +11,8 @@ class App extends Component {
 
         this.state = {
             myAppointments: [],
-            lastIndex: 0
+            formDisplay: false,
+            lastIndex: 0,
         }
     }
 
@@ -43,7 +44,7 @@ class App extends Component {
                     <div className="row">
                         <div className="col-md-12 bg-white">
                             <div className="container">
-                                <AddAppointments />
+                                <AddAppointments formDisplay={this.state.formDisplay} />
                                 <SearchAppointments />
                                 <ListAppointments 
                                 appointments={this.state.myAppointments}
