@@ -14,7 +14,8 @@ class App extends Component {
             formDisplay: false,
             lastIndex: 0,
             orderBy: 'petName',
-            orderDir: 'asc'
+            orderDir: 'asc',
+            queryText: ''
         }
     }
 
@@ -62,6 +63,14 @@ class App extends Component {
 
     render() {
         let order, filteredApts = this.state.myAppointments;
+
+        filteredApts = filteredApts.filter(apt => {
+            return (
+                apt.petName.toLowerCase().includes(this.state.queryText.toLocaleLowerCase()) ||
+                apt.ownerName.toLowerCase().includes(this.state.queryText.toLocaleLowerCase()) ||
+                apt.aptNotes.toLowerCase().includes(this.state.queryText.toLocaleLowerCase())
+            )
+        })
 
         order = this.state.orderDir === 'asc' ? 1 : -1;
         filteredApts.sort((a, b) => {
