@@ -13,6 +13,8 @@ class App extends Component {
             myAppointments: [],
             formDisplay: false,
             lastIndex: 0,
+            orderBy: 'petName',
+            orderDir: 'asc'
         }
     }
 
@@ -52,6 +54,23 @@ class App extends Component {
     }
 
     render() {
+        let order, filteredApts = this.state.myAppointments;
+
+        order = this.state.orderDir === 'asc' ? 1 : -1;
+        filteredApts.sort((a, b) => {
+            //todo test later
+            // const result = a[this.state.orderBy].localeCompare(b[this.state.orderBy]);
+            // return result * order;
+
+            if (a[this.state.orderBy].toLowerCase() < 
+                b[this.state.orderBy].toLowerCase()
+            ) {
+                return -1 * order;
+            } else {
+                return 1 * order;
+            }
+        });
+
         return (
             <main className="page bg-white" id="petratings">
                 <div className="container">
@@ -65,7 +84,7 @@ class App extends Component {
                                     />
                                 <SearchAppointments />
                                 <ListAppointments 
-                                appointments={this.state.myAppointments}
+                                appointments={filteredApts}
                                 deleteAppointment={this.deleteAppointment} />
                             </div>
                         </div>
