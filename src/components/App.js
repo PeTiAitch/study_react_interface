@@ -3,7 +3,7 @@ import '../css/App.css';
 import AddAppointments from './AddAppointments';
 import ListAppointments from './ListAppointments';
 import SearchAppointments from './SearchAppointments';
-import {without} from 'lodash';
+import {without, findIndex} from 'lodash';
 
 class App extends Component {
     constructor() {
@@ -67,6 +67,15 @@ class App extends Component {
         })
     }
 
+    updateInfo = (name, value, id) => {
+        const apts = this.state.myAppointments;
+        const index = findIndex(this.state.myAppointments, {id});
+        apts[index][name] = value;
+        this.setState({
+            myAppointments: apts
+        });
+    }
+
     render() {
         let order, filteredApts = this.state.myAppointments;
 
@@ -111,8 +120,10 @@ class App extends Component {
                                     searchApts = {this.searchApts}
                                 />
                                 <ListAppointments 
-                                appointments={filteredApts}
-                                deleteAppointment={this.deleteAppointment} />
+                                    appointments={filteredApts}
+                                    deleteAppointment={this.deleteAppointment} 
+                                    updateInfo = {this.updateInfo}
+                                />
                             </div>
                         </div>
                     </div>
