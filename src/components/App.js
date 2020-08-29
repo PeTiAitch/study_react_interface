@@ -61,6 +61,12 @@ class App extends Component {
         });
     };
 
+    searchApts = (queryText) => {
+        this.setState({
+            queryText
+        })
+    }
+
     render() {
         let order, filteredApts = this.state.myAppointments;
 
@@ -102,6 +108,7 @@ class App extends Component {
                                     orderBy={this.state.orderBy} 
                                     orderDir = {this.state.orderDir} 
                                     changeOrder = {this.changeOrder}
+                                    searchApts = {this.searchApts}
                                 />
                                 <ListAppointments 
                                 appointments={filteredApts}
