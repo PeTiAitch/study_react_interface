@@ -58,17 +58,17 @@ class App extends Component {
 
         order = this.state.orderDir === 'asc' ? 1 : -1;
         filteredApts.sort((a, b) => {
-            //todo test later
-            // const result = a[this.state.orderBy].localeCompare(b[this.state.orderBy]);
-            // return result * order;
+            // Mine, works the same as the one below
+            const result = a[this.state.orderBy].localeCompare(b[this.state.orderBy]);
+            return result * order;
 
-            if (a[this.state.orderBy].toLowerCase() < 
-                b[this.state.orderBy].toLowerCase()
-            ) {
-                return -1 * order;
-            } else {
-                return 1 * order;
-            }
+            // if (a[this.state.orderBy].toLowerCase() < 
+            //     b[this.state.orderBy].toLowerCase()
+            // ) {
+            //     return -1 * order;
+            // } else {
+            //     return 1 * order;
+            // }
         });
 
         return (
@@ -82,7 +82,9 @@ class App extends Component {
                                     toggleForm={this.toggleForm}
                                     addAppointment={this.addAppointment}
                                     />
-                                <SearchAppointments />
+                                <SearchAppointments
+                                    orderBy={this.state.orderBy}
+                                    orderDir = {this.state.orderDir} />
                                 <ListAppointments 
                                 appointments={filteredApts}
                                 deleteAppointment={this.deleteAppointment} />
