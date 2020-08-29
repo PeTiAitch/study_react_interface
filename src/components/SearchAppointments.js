@@ -30,6 +30,7 @@ class SearchAppointments extends Component {
                                         (this.props.orderBy === 'petName' ? ' active' : '')
                                     } 
                                     href="#"
+                                    onClick={() => this.props.changeOrder('petName', this.props.orderDir)}
                                 >
                                     Pet Name
                                 </button>
@@ -39,6 +40,7 @@ class SearchAppointments extends Component {
                                         (this.props.orderBy === 'aptDate' ? ' active' : '')
                                     } 
                                     href="#"
+                                    onClick={() => this.props.changeOrder('aptDate', this.props.orderDir)}
                                 >
                                     Date
                                 </button>
@@ -48,6 +50,7 @@ class SearchAppointments extends Component {
                                         (this.props.orderBy === 'ownerName' ? ' active' : '')
                                     } 
                                     href="#"
+                                    onClick={() => this.props.changeOrder('ownerName', this.props.orderDir)}
                                 >
                                     Owner
                                 </button>
@@ -58,6 +61,7 @@ class SearchAppointments extends Component {
                                         (this.props.orderDir === 'asc' ? ' active' : '')
                                     } 
                                     href="#"
+                                    onClick={() => this.props.changeOrder(this.props.orderBy, 'asc')}
                                 >
                                     Asc
                                 </button>
@@ -67,6 +71,7 @@ class SearchAppointments extends Component {
                                         (this.props.orderDir === 'desc' ? ' active' : '')
                                     } 
                                     href="#"
+                                    onClick={() => this.props.changeOrder(this.props.orderBy, 'desc')}
                                 >
                                     Desc
                                 </button>

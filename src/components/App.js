@@ -37,11 +37,11 @@ class App extends Component {
         this.setState({
             myAppointments: tempAppointments
         })
-    }
+    };
 
     toggleForm = () => {
         this.setState({formDisplay: !this.state.formDisplay});
-    }
+    };
 
     addAppointment = (apt) => {
         let tempApts = this.state.myAppointments;
@@ -51,7 +51,14 @@ class App extends Component {
             myAppointments: tempApts,
             lastIndex: this.state.lastIndex + 1
         });
-    }
+    };
+
+    changeOrder = (order, dir) => {
+        this.setState({
+            orderBy: order,
+            orderDir: dir
+        });
+    };
 
     render() {
         let order, filteredApts = this.state.myAppointments;
@@ -83,8 +90,10 @@ class App extends Component {
                                     addAppointment={this.addAppointment}
                                     />
                                 <SearchAppointments
-                                    orderBy={this.state.orderBy}
-                                    orderDir = {this.state.orderDir} />
+                                    orderBy={this.state.orderBy} 
+                                    orderDir = {this.state.orderDir} 
+                                    changeOrder = {this.changeOrder}
+                                />
                                 <ListAppointments 
                                 appointments={filteredApts}
                                 deleteAppointment={this.deleteAppointment} />
